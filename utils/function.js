@@ -303,7 +303,7 @@ const updateManager=()=>{
             type:'list',
             name:'newmanager',
             message:"Who is the new manager?",
-            choices: employeeChoices
+            choices: managerChoices
         }
     ])
     .then((res)=>{
@@ -312,11 +312,16 @@ const updateManager=()=>{
             if(employee.fullName===res.employeename)
             employeeid=employee.employee_id
         })
-        let mangid;
-        eEmp.map(employee=>{
-            if(employee.fullName===res.newmanager)
-            mangid=employee.employee_id
-        })
+            let noManager={
+                fullName: 'No Manager',
+                employee_id: null
+            }
+            eEmp.push(noManager)
+            let mangid;
+            eEmp.map(employee=>{
+                if(employee.fullName===res.newmanager)
+                mangid=employee.employee_id
+            })
         const params = [{manager_id:mangid},{employee_id:employeeid}]
             db.query(`UPDATE employee SET? WHERE?`,params,(err,row)=>{
                 if (err)throw err;

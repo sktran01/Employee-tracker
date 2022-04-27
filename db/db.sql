@@ -1,7 +1,8 @@
+-- create a database
 DROP DATABASE IF EXISTS employeeDB;
 CREATE DATABASE employeeDB;
 USE employeeDB;
-
+-- schema sql
 DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS department;
@@ -29,7 +30,7 @@ CREATE TABLE employee (
 
 );
 
-
+-- seeds.sql
 INSERT INTO department (department_name)
 VALUES ('Sales'),('Engineering'),('Finance'),('Legal'),('Human Resources');
 
