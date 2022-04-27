@@ -123,7 +123,7 @@ const addDepartment=()=>{
                 chooseTask();
                 return 
             }
-            console.log('\n Department added! See department table\n')
+            console.log(`\n ${res.dept_name} department added! See department table\n`)
             viewAllDepartments();
         });
     });
@@ -179,7 +179,7 @@ const addRole=()=>{
                         return
                     }
                     if(err)throw err
-                    console.log('\n\n new role added!')
+                    console.log(`\n\n ${res.title} added!`)
                     viewAllRoles();
                 });
             }); 
@@ -247,7 +247,7 @@ const addEmployee=()=>{
             const params=[res.firstname,res.lastname,new_id,m_id]
             db.query(sql,params,(err,row)=>{
                 if(err)throw err
-                console.log("\n\n Employee added!")
+                console.log(`\n\n ${res.firstname} ${res.lastname} added!`)
                 viewAllEmployees();
             });
         });
@@ -285,7 +285,7 @@ const updateEmployee=()=>{
             const params = [{role_id:roleid},{employee_id:employeeid}]
             db.query(`UPDATE employee SET? WHERE?`,params,(err,row)=>{
                 if (err)throw err;
-                console.log("\n\n success! employee's role updated")
+                console.log(`\n\n success! ${res.employeename}'s role updated`)
                 viewAllEmployees()
             });       
         });
@@ -320,7 +320,7 @@ const updateManager=()=>{
         const params = [{manager_id:mangid},{employee_id:employeeid}]
             db.query(`UPDATE employee SET? WHERE?`,params,(err,row)=>{
                 if (err)throw err;
-                console.log("\n\n success! employee's manager updated")
+                console.log(`\n\n success! ${res.employeename}'s manager updated`)
                 viewAllEmployees()
             });
     });
@@ -345,7 +345,7 @@ const deleteDepartment=()=>{
         const params=[{department_id:new_id}]
         db.query(`DELETE FROM department WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('\n\n Department Deleted!')
+            console.log(`\n\n ${res.delete} department deleted!`)
             viewAllDepartments();
         });
     });
@@ -370,7 +370,7 @@ const deleteRoles=()=>{
         const params=[{role_id:roleid}]
         db.query(`DELETE FROM role WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('\n\n Role Deleted!')
+            console.log(`\n\n ${res.delete} deleted!`)
             viewAllRoles();
         });
     });
@@ -394,7 +394,7 @@ const deleteEmployee=()=>{
         const params=[{employee_id:employeeid}]
         db.query(`DELETE FROM employee WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('\n\n Employee Deleted!')
+            console.log(`\n\n ${res.delete} deleted!`)
             viewAllEmployees();
         });
     });
@@ -451,7 +451,7 @@ const viewByDepartment=()=>{
                 console.log(`\n\nThere is no employee in the ${res.dept} department\n\n`)
                 chooseTask()
             }else{
-            console.log(`\n\nThe following employees are in the ${res.dept} department\n`)
+            console.log(`\n\nThe following employee(s) is/are in the ${res.dept} department\n`)
             console.table(result)
             chooseTask()
             }
@@ -476,7 +476,8 @@ const viewBudget=()=>{
 
         db.query(sql,res.dept,(err,result)=>{
             if(err)throw err
-            console.table('\n\n'+ result)
+            console.log('\n\n')
+            console.table(result)
           let salaries=(result.map(cost=>cost.salary)).map(Number)
           let budget=salaries.reduce((total,amount)=>total+amount);
             console.log(`${res.dept} department has ${result.length} employee(s) for a total budget of $${budget}.\n\n`)
