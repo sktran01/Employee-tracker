@@ -247,7 +247,7 @@ const addEmployee=()=>{
             const params=[res.firstname,res.lastname,new_id,m_id]
             db.query(sql,params,(err,row)=>{
                 if(err)throw err
-                console.log("Employee added!")
+                console.log("\n\n Employee added!")
                 viewAllEmployees();
             });
         });
@@ -345,7 +345,7 @@ const deleteDepartment=()=>{
         const params=[{department_id:new_id}]
         db.query(`DELETE FROM department WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('Department Deleted!')
+            console.log('\n\n Department Deleted!')
             viewAllDepartments();
         });
     });
@@ -370,7 +370,7 @@ const deleteRoles=()=>{
         const params=[{role_id:roleid}]
         db.query(`DELETE FROM role WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('Role Deleted!')
+            console.log('\n\n Role Deleted!')
             viewAllRoles();
         });
     });
@@ -394,7 +394,7 @@ const deleteEmployee=()=>{
         const params=[{employee_id:employeeid}]
         db.query(`DELETE FROM employee WHERE?`,params,(err,result)=>{
             if(err)throw err;
-            console.log('Employee Deleted!')
+            console.log('\n\n Employee Deleted!')
             viewAllEmployees();
         });
     });
@@ -414,8 +414,7 @@ const viewByManager=()=>{
     eEmp.map(employee=>{
         if(employee.fullName===res.manager)
         employeeid=employee.employee_id
-        console.log(employeeid)
-    })
+    });
     const params = employeeid
     db.query(`SELECT first_name, last_name, manager_id FROM employee WHERE manager_id = ?`,params,(err,result)=>{
         if(err)throw err
@@ -477,10 +476,10 @@ const viewBudget=()=>{
 
         db.query(sql,res.dept,(err,result)=>{
             if(err)throw err
-            console.table(result)
+            console.table('\n\n'+ result)
           let salaries=(result.map(cost=>cost.salary)).map(Number)
           let budget=salaries.reduce((total,amount)=>total+amount);
-            console.log(`${res.dept} has ${result.length} employees for a total budget of $${budget}.`)
+            console.log(`${res.dept} department has ${result.length} employee(s) for a total budget of $${budget}.\n\n`)
             chooseTask()
         });
     });
